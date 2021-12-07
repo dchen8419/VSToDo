@@ -28,7 +28,7 @@ public static createOrShow(extensionUri: vscode.Uri) {
     // Otherwise, create a new panel.
     const panel = vscode.window.createWebviewPanel(
     HelloWorldPanel.viewType,
-    "VSinder",
+    "VSTodo",
     column || vscode.ViewColumn.One,
     {
         // Enable javascript in the webview
