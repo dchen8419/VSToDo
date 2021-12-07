@@ -27,7 +27,7 @@
 			]
 		},
 		"views": {
-			"vsinder-sidebar-view": [
+			"vstodo-sidebar-view": [
 			{
 				"type": "webview",
 				"id": "vstodo-sidebar",
