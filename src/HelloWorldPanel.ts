@@ -125,7 +125,7 @@ private async _update() {
 private _getHtmlForWebview(webview: vscode.Webview) {
     // // And the uri we use to load this script in the webview
     const scriptUri = webview.asWebviewUri(
-    vscode.Uri.joinPath(this._extensionUri, "media", "main.js")
+    vscode.Uri.joinPath(this._extensionUri, "out/compiled", "HelloWorld.js")
     );
 
     // Local path to css styles
@@ -165,9 +165,6 @@ private _getHtmlForWebview(webview: vscode.Webview) {
         </script>
 			</head>
             <body>
-            <h1>Hello World</h1>
-            <input />
-            <button>hello</button>
 			</body>
             <script src="${scriptUri}"nonce="${nonce}">
 			</html>`;
