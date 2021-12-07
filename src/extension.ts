@@ -9,8 +9,14 @@ export function activate(context: vscode.ExtensionContext) {
 		})
 	);
 	context.subscriptions.push(
-		vscode.commands.registerCommand("vstodo.askQuestion", () =>{
-			vscode.window.showInformationMessage("How was your day?", "Good", "Bad");
+		vscode.commands.registerCommand("vstodo.askQuestion", async () => {
+			const answer = await vscode.window.showInformationMessage("How was your day?", "Good", "Bad");
+
+			if (answer === 'Bad') {
+				vscode.window.showInformationMessage("Sorry to hear that");
+			} else {
+				vscode.window.showInformationMessage("I hope your day continues to be good");
+			}
 		})
 	);
 }
