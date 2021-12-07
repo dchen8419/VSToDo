@@ -2,7 +2,13 @@ import * as vscode from 'vscode';
 import { HelloWorldPanel } from './HelloWorldPanel';
 
 export function activate(context: vscode.ExtensionContext) {
-	console.log('Congratulations, your extension "vstodo" is now active!');
+	const sidebarProvider = new SidebarProvider(context.extensionUri);
+	context.subscriptions.push(
+	vscode.window.registerWebviewViewProvider(
+		"vstodo-sidebar",
+		sidebarProvider
+	)
+	);
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vstodo.helloWorld', () => {
