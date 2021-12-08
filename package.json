@@ -12,10 +12,31 @@
 	"activationEvents": [
 		"onCommand:vstodo.helloWorld",
 		"onCommand:vstodo.askQuestion",
-		"onCommand:vstodo.refresh"
+		"onCommand:vstodo.refresh",
+		"onView:vstodo-sidebar"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "vstodo-sidebar-view",
+					"title": "VSTodo",
+					"icon": "media/checklist.svg"
+				}
+			]
+		},
+		"views": {
+			"vstodo-sidebar-view": [
+				{
+					"type": "webview",
+					"id": "vstodo-sidebar",
+					"name": "VSTodo",
+					"icon": "media/checklist.svg",
+					"contextualTitle": "VSTodo"
+				}
+			]
+		},
 		"commands": [
 			{
 				"command": "vstodo.helloWorld",
@@ -56,6 +77,8 @@
 		"glob": "^7.1.7",
 		"mocha": "^9.1.3",
 		"postcss": "^8.4.4",
+		"rollup": "^2.60.2",
+		"rollup-plugin-css-only": "^3.1.0",
 		"rollup-plugin-postcss": "^4.0.2",
 		"rollup-plugin-svelte": "^7.1.0",
 		"rollup-plugin-terser": "^7.0.2",
