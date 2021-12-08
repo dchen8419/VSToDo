@@ -4,7 +4,7 @@
 
 <style>
     div{
-        color: white;
+        color:blue;
     }
 </style>
 
