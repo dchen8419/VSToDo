@@ -7,16 +7,16 @@ import { onMount } from "svelte";
 
     onMount(() => {
         window.addEventListener('message', event => {
-        const message = event.data; // The json data that the extension sent
-        console.log({message})
+        const message = event.data;
         switch (message.type) {
             case 'new-todo':
-                todos = [{text:message.value, completed: false},
-                ...todos,    
+                todos = [
+                    {text:message.value, completed: false},
+                    ...todos,    
                 ];
                 break;
-        }
-    });
+            }
+        });
     })
 </script>
 
