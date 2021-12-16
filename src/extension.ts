@@ -1,8 +1,13 @@
 import * as vscode from 'vscode';
+import { authenticate } from './authenticate';
 import { HelloWorldPanel } from './HelloWorldPanel';
 import { SidebarProvider } from "./SidebarProvider";
+import { TokenManager } from './TokenManager';
+
 
 export function activate(context: vscode.ExtensionContext) {
+	TokenManager.globalState = context.globalState;
+	console.log('token value is: ', TokenManager.getToken());
 	const sidebarProvider = new SidebarProvider(context.extensionUri);
 
 	const item = vscode.window.createStatusBarItem(
@@ -21,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vstodo.addTodo', () => {
-			const {activeTextEditor} = vscode.window
+			const {activeTextEditor} = vscode.window;
 
 			if(!activeTextEditor) {
 				vscode.window.showInformationMessage("No active text editor");
@@ -42,6 +47,16 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vstodo.helloWorld', () => {
 			HelloWorldPanel.createOrShow(context.extensionUri);
+		})
+	);
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('vstodo.authenticate', () => {
+			try {
+				authenticate();
+			} catch (err) {
+				console.log(err);
+			}
 		})
 	);
 
