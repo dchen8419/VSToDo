@@ -49,7 +49,11 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('vstodo.authenticate', () => {
-			authenticate();
+			try {
+				authenticate();
+			} catch (err) {
+				console.log(err);
+			}
 		})
 	);
 
