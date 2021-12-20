@@ -1,11 +1,14 @@
 <script lang="ts">
+import { stringify } from "querystring";
 import { onMount } from "svelte";
 
 
     let todos: Array<{ text: string; completed: boolean }> = [];
     let text = "";
+    let loading = true;
+    let user: {name: string, id: number} | null = null;
 
-    onMount(() => {
+    onMount(async() => {
         window.addEventListener('message', event => {
         const message = event.data;
         switch (message.type) {
@@ -17,6 +20,10 @@ import { onMount } from "svelte";
                 break;
             }
         });
+        const response = await fetch(`${apiBaseUrl}/me`);
+        const data = await response.json();
+        user = data.user;
+        loading = false;
     })
 </script>
 
@@ -25,6 +32,14 @@ import { onMount } from "svelte";
         text-decoration: line-through;
     }
 </style>
+
+{#if loading}
+<div>loading...</div>
+{:else if user}
+<pre>{JSON.stringify(user, null , 2)}</pre>
+{:else}
+<div>no user is logged in</div>
+{/if}
 
 <form 
     on:submit|preventDefault={() => {
